@@ -36,7 +36,7 @@
 
 
 ## 공연 티켓팅 웹 서비스 간트차트 일정  
-`https://ahndohyung.atlassian.net/jira/software/projects/KAN/boards/1/timeline`
+[간트차트] (https://ahndohyung.atlassian.net/jira/software/projects/KAN/boards/1/timeline)
 
 | WBS-Code | 작업명                                             | 시작일     | 종료일     | 기간(일) |
 |----------|----------------------------------------------------|------------|------------|---------:|
