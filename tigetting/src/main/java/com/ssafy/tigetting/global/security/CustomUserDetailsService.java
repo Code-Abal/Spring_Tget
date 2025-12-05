@@ -1,7 +1,7 @@
-package com.ssafy.tigetting.config;
+package com.ssafy.tigetting.global.security;
 
-import com.ssafy.tigetting.entity.User;
 import com.ssafy.tigetting.mapper.UserMapper;
+import com.ssafy.tigetting.user.entity.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +18,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     public CustomUserDetailsService(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -1,4 +1,4 @@
-package com.ssafy.tigetting.config;
+package com.ssafy.tigetting.global.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
