@@ -46,6 +46,7 @@ public class Performance {
     private LocalDateTime updatedAt;
 
     private List<PerformanceSchedule> schedules;
+    //private List<PerformanceUrl> schedules;
 
     public enum PerformanceStatus {
         UPCOMING, ONGOING, ENDED, CANCELLED
