@@ -1,10 +1,9 @@
-package com.ssafy.tigetting.config;
+package com.ssafy.tigetting.global.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.ssafy.tigetting.service.TokenBlacklistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,9 +23,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @Autowired
-    private TokenBlacklistService tokenBlacklistService;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
@@ -38,11 +34,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             try {
                 // 1. 블랙리스트 체크
-                if (tokenBlacklistService.isTokenBlacklisted(token)) {
-                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                    response.getWriter().write("{\"error\":\"Token has been invalidated\"}");
-                    return;
-                }
+//                if (tokenBlacklistService.isTokenBlacklisted(token)) {
+//                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//                    response.getWriter().write("{\"error\":\"Token has been invalidated\"}");
+//                    return;
+//                }
 
                 // 2. 토큰에서 사용자명 추출
                 String username = jwtUtil.extractUsername(token);

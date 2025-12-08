@@ -1,32 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.tigetting.mapper.UserMapper">
 
+    <!-- ✅ ResultMap: User + Role 매핑 -->
+    <resultMap id="UserResultMap" type="com.ssafy.tigetting.user.entity.User">
+        <!-- users.userid -->
+        <id property="userId" column="user_id"/>
+
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+
+        <!-- ✅ Role 객체 매핑 (roles.roleid, roles.name) -->
+        <association property="role" javaType="com.ssafy.tigetting.user.entity.Role">
+            <id property="roleId" column="role_id"/>
+            <result property="roleName" column="role_name"/>
+        </association>
+    </resultMap>
+
+    <!-- ✅ INSERT -->
     <insert id="save" useGeneratedKeys="true" keyProperty="userId">
-        INSERT INTO users (username, email, password_hash, phone_number, role, created_at, updated_at)
-        VALUES (#{username}, #{email}, #{passwordHash}, #{phoneNumber}, #{role}, #{createdAt}, #{updatedAt})
+        INSERT INTO users (
+            email,
+            password,
+            name,
+            phone,
+            roleid
+        )
+        VALUES (
+            #{email},
+            #{password},
+            #{name},
+            #{phone},
+            #{role.roleId}
+        )
     </insert>
 
-    <select id="findById" resultType="User">
-        SELECT * FROM users WHERE user_id = #{id}
+    <!-- ✅ 조회: ID -->
+    <select id="findById" resultMap="UserResultMap">
+        SELECT
+            u.userid AS user_id,
+            u.email,
+            u.password,
+            u.name,
+            u.phone,
+            r.roleid AS role_id,
+            r.name   AS role_name
+        FROM users u
+        JOIN roles r ON u.roleid = r.roleid
+        WHERE u.userid = #{id}
     </select>
 
-    <select id="findByUsername" resultType="User">
-        SELECT * FROM users WHERE username = #{username}
+    <!-- ✅ 조회: EMAIL (로그인용) -->
+    <select id="findByEmail" resultMap="UserResultMap">
+        SELECT
+            u.userid AS user_id,
+            u.email,
+            u.password,
+            u.name,
+            u.phone,
+            r.roleid AS role_id,
+            r.name   AS role_name
+        FROM users u
+        JOIN roles r ON u.roleid = r.roleid
+        WHERE u.email = #{email}
     </select>
 
-    <select id="findByEmail" resultType="User">
-        SELECT * FROM users WHERE email = #{email}
-    </select>
-
-    <select id="existsByUsername" resultType="boolean">
-        SELECT COUNT(*) > 0 FROM users WHERE username = #{username}
-    </select>
-
+    <!-- ✅ 존재 여부 -->
     <select id="existsByEmail" resultType="boolean">
-        SELECT COUNT(*) > 0 FROM users WHERE email = #{email}
+        SELECT COUNT(*) > 0
+        FROM users
+        WHERE email = #{email}
     </select>
 
 </mapper>

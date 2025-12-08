@@ -1,4 +1,4 @@
-package com.ssafy.tigetting.config;
+package com.ssafy.tigetting.global.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +31,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -50,8 +51,10 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
                         // 인증 관련 엔드포인트 허용
-                        .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/admin/auth/login").permitAll()  // 관리자 로그인만 허용
+                        .requestMatchers("/admin/auth/**").hasRole("ADMIN")
+                        .requestMatchers("/auth/**").permitAll()
+
 
                         // 헬스체크 허용
                         .requestMatchers("/actuator/**").permitAll()
@@ -62,7 +65,7 @@ public class SecurityConfig {
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
 
                         // 관리자 전용 API 엔드포인트 (로그인 후 ADMIN 권한 필요)
-                        .requestMatchers("/admin/auth/**").hasRole("ADMIN")
+
                         .requestMatchers("/admin/api/**").hasRole("ADMIN")
 
                         // 나머지는 인증 필요

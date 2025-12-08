@@ -1,6 +1,6 @@
 package com.ssafy.tigetting.mapper;
 
-import com.ssafy.tigetting.entity.Venue;
+import com.ssafy.tigetting.venue.entity.Venue;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

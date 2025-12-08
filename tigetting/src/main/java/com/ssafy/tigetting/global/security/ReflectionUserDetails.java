@@ -1,11 +1,13 @@
-package com.ssafy.tigetting.security;
+package com.ssafy.tigetting.global.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ReflectionUserDetails implements UserDetails {
@@ -49,19 +51,26 @@ public class ReflectionUserDetails implements UserDetails {
     }
 
     private static Collection<? extends GrantedAuthority> resolveAuthorities(Object u) {
-        Object single = invokeAny(u, List.of("getRole", "getRoleName"));
-        if (single != null) {
-            return List.of(new SimpleGrantedAuthority(normalizeRole(single)));
+
+        try {
+            Method m = u.getClass().getMethod("getRoleId");
+            Object v = m.invoke(u);
+
+            if (v instanceof Integer roleId) {
+                String role = switch (roleId) {
+                    case 1 -> "ROLE_ADMIN";
+                    case 2 -> "ROLE_USER";
+                    default -> throw new IllegalStateException("Unknown roleId: " + roleId);
+                };
+                return List.of(new SimpleGrantedAuthority(role));
+            }
+        } catch (NoSuchMethodException ignored) {
+            // getRoleId 없으면 아래 기본값
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to resolve authorities from roleId", e);
         }
 
-        Object rolesObj = invokeAny(u, List.of("getRoles"));
-        if (rolesObj instanceof Collection<?> col) {
-            return col.stream()
-                    .map(ReflectionUserDetails::normalizeRole)
-                    .map(SimpleGrantedAuthority::new)
-                    .collect(Collectors.toList());
-        }
-
+        // fallback (정말 최후)
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 

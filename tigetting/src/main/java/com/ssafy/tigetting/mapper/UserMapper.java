@@ -1,6 +1,6 @@
 package com.ssafy.tigetting.mapper;
 
-import com.ssafy.tigetting.entity.User;
+import com.ssafy.tigetting.user.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;

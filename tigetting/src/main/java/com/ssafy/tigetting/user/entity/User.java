@@ -1,5 +1,7 @@
-package com.ssafy.tigetting.entity;
+package com.ssafy.tigetting.user.entity;
 
+import com.ssafy.tigetting.entity.Booking;
+import com.ssafy.tigetting.entity.SeatLock;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,17 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class User {
-
     private Long userId;
-
-    private String username;
-
     private String email;
-
-    private String passwordHash;
-
-    private String phoneNumber;
-
+    private String password;
+    private String name;
+    private String phone;
     private Role role;
 
     private LocalDateTime lastLogin;
@@ -36,7 +32,4 @@ public class User {
 
     private List<SeatLock> seatLocks;
 
-    public enum Role {
-        USER, ADMIN
-    }
 }

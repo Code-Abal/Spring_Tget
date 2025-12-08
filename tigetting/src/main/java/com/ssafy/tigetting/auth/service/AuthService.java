@@ -1,57 +1,50 @@
-package com.ssafy.tigetting.controller;
+package com.ssafy.tigetting.auth.service;
 
-import com.ssafy.tigetting.config.JwtUtil;
-import com.ssafy.tigetting.dto.AuthDtos;
+import com.ssafy.tigetting.auth.dto.AuthResponse;
+import com.ssafy.tigetting.auth.dto.LoginRequest;
+import com.ssafy.tigetting.global.security.JwtUtil;
+import com.ssafy.tigetting.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-import com.ssafy.tigetting.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/auth")
-public class AuthController {
+@Service
+public class AuthService {
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     private final UserService userService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserService userService) {
+    public AuthService(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
         this.userService = userService;
     }
 
-    /**
-     * 일반 사용자 로그인 (관리자도 이 엔드포인트 사용 가능하지만 /admin/auth/login 권장)
-     */
-    @PostMapping("/login")
-    public AuthDtos.AuthResponse login(@Valid @RequestBody AuthDtos.LoginRequest dto) {
-        // 이메일인지 사용자명인지 판단해서 실제 사용자명 가져오기
-        String actualUsername = userService.resolveUsernameFromEmailOrUsername(dto.getUsernameOrEmail());
+    public AuthResponse login(LoginRequest dto) {
+        String username = userService.resolveUsernameFromEmailOrUsername(dto.getUsernameOrEmail());
 
         Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(actualUsername, dto.getPassword())
+                new UsernamePasswordAuthenticationToken(username, dto.getPassword())
         );
 
         String token = jwtUtil.generate(auth.getName());
-        String userRole = userService.getUserRole(actualUsername);
+        String role = userService.getUserRole(username);
 
-        return new AuthDtos.AuthResponse(token, userRole);
+        return new AuthResponse(token, role);
     }
 
-    /**
+    /* *
      * 일반 사용자 로그아웃
-     */
-    @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request, Authentication authentication) {
-        String username = authentication != null ? authentication.getName() : "anonymous";
+     * */
+    public ResponseEntity<?> logout(HttpServletRequest request, Authentication auth) {
+        String username = auth != null ? auth.getName() : "anonymous";
 
         // Authorization 헤더에서 토큰 추출
         String authHeader = request.getHeader("Authorization");

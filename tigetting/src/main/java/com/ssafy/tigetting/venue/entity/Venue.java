@@ -1,5 +1,7 @@
-package com.ssafy.tigetting.entity;
+package com.ssafy.tigetting.venue.entity;
 
+import com.ssafy.tigetting.entity.Performance;
+import com.ssafy.tigetting.entity.VenueSeat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

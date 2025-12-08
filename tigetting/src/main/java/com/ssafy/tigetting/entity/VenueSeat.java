@@ -1,5 +1,6 @@
 package com.ssafy.tigetting.entity;
 
+import com.ssafy.tigetting.venue.entity.Venue;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
