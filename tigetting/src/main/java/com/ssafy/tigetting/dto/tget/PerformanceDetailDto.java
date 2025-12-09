@@ -1,4 +1,4 @@
-package com.ssafy.tigetting.dto.response;
+package com.ssafy.tigetting.dto.tget;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PerformanceDetailResponseDto {
+public class PerformanceDetailDto {
 
     // 공연 기본 정보
     private String mt20id;

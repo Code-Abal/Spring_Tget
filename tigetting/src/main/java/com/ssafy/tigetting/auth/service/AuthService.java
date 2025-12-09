@@ -3,6 +3,7 @@ package com.ssafy.tigetting.auth.service;
 import com.ssafy.tigetting.auth.dto.AuthResponse;
 import com.ssafy.tigetting.auth.dto.LoginRequest;
 import com.ssafy.tigetting.global.security.JwtUtil;
+import com.ssafy.tigetting.user.entity.UserEntity;
 import com.ssafy.tigetting.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -28,16 +29,15 @@ public class AuthService {
     }
 
     public AuthResponse login(LoginRequest dto) {
-        String username = userService.resolveUsernameFromEmailOrUsername(dto.getUsernameOrEmail());
+        UserEntity user = userService.resolveUserFromEmail(dto.getUserEmail());
 
         Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, dto.getPassword())
+                new UsernamePasswordAuthenticationToken(user.getEmail(), dto.getPassword())
         );
 
         String token = jwtUtil.generate(auth.getName());
-        String role = userService.getUserRole(username);
 
-        return new AuthResponse(token, role);
+        return new AuthResponse(token, user.getRole().getName());
     }
 
     /* *

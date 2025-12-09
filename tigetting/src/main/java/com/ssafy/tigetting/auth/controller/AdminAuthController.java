@@ -4,6 +4,7 @@ import com.ssafy.tigetting.auth.dto.AuthResponse;
 import com.ssafy.tigetting.auth.dto.LoginRequest;
 import com.ssafy.tigetting.global.security.JwtUtil;
 import com.ssafy.tigetting.user.entity.User;
+import com.ssafy.tigetting.user.entity.UserEntity;
 import com.ssafy.tigetting.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -38,23 +39,24 @@ public class AdminAuthController {
     @PostMapping("/login")
     public ResponseEntity<?> adminLogin(@Valid @RequestBody LoginRequest dto) {
         try {
-            // 사용자명 또는 이메일로 실제 사용자명 찾기
-            String actualUsername = userService.resolveUsernameFromEmailOrUsername(dto.getUsernameOrEmail());
-
-//            // 사용자 정보 조회하여 ADMIN 권한 확인
-//            //String userRole = userService.getUserRole(actualUsername);
-//            if (!"ADMIN".equals(actualUsername)) {
-//                return ResponseEntity.status(403).body(Map.of(
-//                        "error", "Forbidden",
-//                        "message", "관리자 권한이 필요합니다",
-//                        "timestamp", LocalDateTime.now()
-//                ));
-//            }
-
-            // 인증 수행
             Authentication auth = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken("admin@ssafy.com","1234")
+                    new UsernamePasswordAuthenticationToken(
+                            dto.getUserEmail(),
+                            dto.getPassword()
+                    )
             );
+
+            // 인증 성공 후 권한 확인
+            boolean isAdmin = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+            if (!isAdmin) {
+                return ResponseEntity.status(403).body(Map.of(
+                        "error", "Forbidden",
+                        "message", "관리자 권한이 필요합니다",
+                        "timestamp", LocalDateTime.now()
+                ));
+            }
 
             // JWT 토큰 생성
             String token = jwtUtil.generate(auth.getName());
@@ -124,14 +126,13 @@ public class AdminAuthController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> adminStatus(Authentication authentication) {
         String adminUsername = authentication.getName();
-        User admin = userService.findByUsername(adminUsername);
+        UserEntity admin = userService.findByUsername(adminUsername);
 
         // 롤만따로 ok, user만 ok, 둘다 x
 
         return ResponseEntity.ok(Map.of(
                 "admin", adminUsername,
-                "role", admin.getRole().getRoleName(),
-                "lastLogin", admin.getLastLogin(),
+                "role", admin.getRole().getName(),
                 "isActive", true,
                 "timestamp", LocalDateTime.now()
         ));

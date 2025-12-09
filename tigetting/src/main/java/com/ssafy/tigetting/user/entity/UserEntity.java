@@ -1,4 +1,4 @@
-package com.ssafy.tigetting.entity.tget;
+package com.ssafy.tigetting.user.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +27,8 @@ public class UserEntity {
 
     private String phone; // 전화번호
 
-    private Integer roleId; // 권한 ID (FK -> roles)
+    private RoleEntity role; // 권한 ID (FK -> roles)
 
     private LocalDateTime register; // 가입일
+
 }
