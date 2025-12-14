@@ -6,15 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="03c6254b-39aa-46e6-a8f5-543d1c950438" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/tigetting.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/tigetting.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/tigetting.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/tigetting.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/global/security/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/global/security/CustomUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/auth/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/auth/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/auth/dto/AuthResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/auth/dto/AuthResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/auth/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/global/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/global/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/user/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/application.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/static/admin-login.html" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/static/admin-login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/static/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/static/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,9 +75,10 @@
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.TigettingApplication.executor": "Run",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "성원251208",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/SSAFY/SSAFY_Tigetting/framework_tigetting_t10",
@@ -114,16 +115,28 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="f64ffba2-d289-4f19-842f-d87709b9290a" name="변경" comment="" />
+      <changelist id="03c6254b-39aa-46e6-a8f5-543d1c950438" name="변경" comment="" />
       <created>1764920146354</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1764920146354</updated>
       <workItem from="1764920147686" duration="8845000" />
+      <workItem from="1765430733942" duration="23333000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

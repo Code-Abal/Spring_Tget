@@ -18,7 +18,7 @@
         <!-- ✅ Role 객체 매핑 (roles.roleid, roles.name) -->
         <association property="role" javaType="com.ssafy.tigetting.user.entity.RoleEntity">
             <id property="roleId" column="roleid"/>
-            <result property="name" column="name"/>
+            <result property="name" column="role_name"/>
         </association>
     </resultMap>
 
@@ -29,14 +29,16 @@
             password,
             name,
             phone,
-            roleid
+            roleid,
+            register
         )
         VALUES (
             #{email},
             #{password},
             #{name},
             #{phone},
-            #{role.roleId}
+            #{role.roleId},
+            #{register}
         )
     </insert>
 
