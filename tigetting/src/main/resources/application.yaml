@@ -12,9 +12,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
-  #mapper-locations: classpath:/mapper/**/*.xml
-  mapper-locations: classpath:mapper/UserMapper.xml
-  type-aliases-package: com.ssafy.tigetting.user.entity
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.ssafy.tigetting.user.entity,com.ssafy.tigetting.entity,com.ssafy.tigetting.venue.entity
   configuration:
     map-underscore-to-camel-case: true
 

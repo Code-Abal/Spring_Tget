@@ -25,7 +25,7 @@ public class Venue {
     private String description;
 
     @Builder.Default
-    private Integer totalCapacity = 0;
+    private Integer totalCapacity = 1;
 
     private String contact;
 

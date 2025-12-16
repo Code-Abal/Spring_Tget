@@ -25,12 +25,55 @@
         WHERE performance_id = #{performanceId}
     </update>
 
-    <select id="findById" resultMap="PerformanceResultMap">
-        SELECT * FROM performances WHERE performance_id = #{id}
+    <select id="findAll" resultType="com.ssafy.tigetting.dto.tget.PerformanceDto">
+        SELECT 
+            p.mt20id,
+            p.prfnm,
+            p.prfpdfrom,
+            p.prfpdto,
+            p.fcltynm,
+            p.poster,
+            p.area,
+            g.genrenm as genreName,
+            p.prfstate,
+            p.mt10id
+        FROM performances p
+        LEFT JOIN genres g ON p.genreid = g.genreid
     </select>
 
-    <select id="findAll" resultMap="PerformanceResultMap">
-        SELECT * FROM performances
+    <select id="findByGenreWithPagination" resultType="com.ssafy.tigetting.dto.tget.PerformanceDto">
+        SELECT 
+            p.mt20id,
+            p.prfnm,
+            p.prfpdfrom,
+            p.prfpdto,
+            p.fcltynm,
+            p.poster,
+            p.area,
+            g.genrenm as genreName,
+            p.prfstate,
+            p.mt10id
+        FROM performances p
+        LEFT JOIN genres g ON p.genreid = g.genreid
+        WHERE g.genrenm = #{genreName}
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="findById" resultType="com.ssafy.tigetting.dto.tget.PerformanceDto">
+        SELECT 
+            p.mt20id,
+            p.prfnm,
+            p.prfpdfrom,
+            p.prfpdto,
+            p.fcltynm,
+            p.poster,
+            p.area,
+            g.genrenm as genreName,
+            p.prfstate,
+            p.mt10id
+        FROM performances p
+        LEFT JOIN genres g ON p.genreid = g.genreid
+        WHERE p.mt20id = #{id}
     </select>
 
     <select id="findByVenueId" resultMap="PerformanceResultMap">

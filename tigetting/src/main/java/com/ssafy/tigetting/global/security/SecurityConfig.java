@@ -59,6 +59,9 @@ public class SecurityConfig {
                         // 헬스체크 허용
                         .requestMatchers("/actuator/**").permitAll()
 
+                        // 공연 정보 조회 허용
+                        .requestMatchers("/performances/**").permitAll()
+
                         // 정적 리소스 및 페이지 라우팅 허용
                         .requestMatchers("/", "/index.html", "/login.html", "/admin-login.html", "/admin.html")
                         .permitAll()
