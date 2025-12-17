@@ -1,12 +1,13 @@
 package com.ssafy.tigetting.performance.controller;
 
 import com.ssafy.tigetting.dto.tget.PerformanceDto;
+import com.ssafy.tigetting.dto.tget.PerformanceDetailDto;
 import com.ssafy.tigetting.performance.service.PerformanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,11 +24,8 @@ public class PerformanceController {
         return ResponseEntity.ok(performanceService.getAllPerformances());
     }
 
-    @GetMapping("/by-genre")
-    public ResponseEntity<List<PerformanceDto>> getPerformancesByGenre(
-            @RequestParam String genre,
-            @RequestParam(defaultValue = "0") int offset,
-            @RequestParam(defaultValue = "20") int limit) {
-        return ResponseEntity.ok(performanceService.getPerformancesByGenre(genre, offset, limit));
+    @GetMapping("/{id}")
+    public ResponseEntity<PerformanceDetailDto> getPerformanceDetail(@PathVariable String id) {
+        return ResponseEntity.ok(performanceService.getPerformanceDetail(id));
     }
 }

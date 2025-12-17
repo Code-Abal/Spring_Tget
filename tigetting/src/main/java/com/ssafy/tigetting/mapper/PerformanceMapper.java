@@ -1,11 +1,12 @@
 package com.ssafy.tigetting.mapper;
 
-import com.ssafy.tigetting.dto.tget.PerformanceDto;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.ssafy.tigetting.dto.tget.PerformanceDto;
+import com.ssafy.tigetting.dto.tget.PerformanceDetailDto;
 
 @Mapper
 public interface PerformanceMapper {
@@ -27,7 +28,5 @@ public interface PerformanceMapper {
 
     List<PerformanceDto> findAll();
     
-    List<PerformanceDto> findByGenreWithPagination(@Param("genreName") String genreName, 
-                                                     @Param("offset") int offset, 
-                                                     @Param("limit") int limit);
+    Optional<PerformanceDetailDto> findDetailById(String id);
 }

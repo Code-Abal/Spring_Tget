@@ -41,24 +41,6 @@
         LEFT JOIN genres g ON p.genreid = g.genreid
     </select>
 
-    <select id="findByGenreWithPagination" resultType="com.ssafy.tigetting.dto.tget.PerformanceDto">
-        SELECT 
-            p.mt20id,
-            p.prfnm,
-            p.prfpdfrom,
-            p.prfpdto,
-            p.fcltynm,
-            p.poster,
-            p.area,
-            g.genrenm as genreName,
-            p.prfstate,
-            p.mt10id
-        FROM performances p
-        LEFT JOIN genres g ON p.genreid = g.genreid
-        WHERE g.genrenm = #{genreName}
-        LIMIT #{offset}, #{limit}
-    </select>
-
     <select id="findById" resultType="com.ssafy.tigetting.dto.tget.PerformanceDto">
         SELECT 
             p.mt20id,
@@ -73,6 +55,58 @@
             p.mt10id
         FROM performances p
         LEFT JOIN genres g ON p.genreid = g.genreid
+        WHERE p.mt20id = #{id}
+    </select>
+
+    <resultMap id="PerformanceDetailResultMap" type="com.ssafy.tigetting.dto.tget.PerformanceDetailDto">
+        <result property="mt20id" column="mt20id"/>
+        <result property="prfnm" column="prfnm"/>
+        <result property="prfpdfrom" column="prfpdfrom"/>
+        <result property="prfpdto" column="prfpdto"/>
+        <result property="fcltynm" column="fcltynm"/>
+        <result property="poster" column="poster"/>
+        <result property="area" column="area"/>
+        <result property="genreName" column="genreName"/>
+        <result property="prfstate" column="prfstate"/>
+        <result property="mt10id" column="mt10id"/>
+        <result property="prfcast" column="prfcast"/>
+        <result property="prfcrew" column="prfcrew"/>
+        <result property="prfruntime" column="prfruntime"/>
+        <result property="prfage" column="prfage"/>
+        <result property="pcseguidance" column="pcseguidance"/>
+        <result property="sty" column="sty"/>
+        <result property="updatedate" column="updatedate"/>
+        <result property="dtguidance" column="dtguidance"/>
+        <collection property="styurls" ofType="String">
+            <result column="styurl"/>
+        </collection>
+    </resultMap>
+
+    <select id="findDetailById" resultMap="PerformanceDetailResultMap">
+        SELECT 
+            p.mt20id,
+            p.prfnm,
+            p.prfpdfrom,
+            p.prfpdto,
+            p.fcltynm,
+            p.poster,
+            p.area,
+            g.genrenm as genreName,
+            p.prfstate,
+            p.mt10id,
+            pd.prfcast,
+            pd.prfcrew,
+            pd.prfruntime,
+            pd.prfage,
+            pd.pcseguidance,
+            pd.sty,
+            pd.updatedate,
+            pd.dtguidance,
+            ps.styurl
+        FROM performances p
+        LEFT JOIN genres g ON p.genreid = g.genreid
+        LEFT JOIN performance_details pd ON p.mt20id = pd.mt20id
+        LEFT JOIN performance_styurls ps ON p.mt20id = ps.mt20id
         WHERE p.mt20id = #{id}
     </select>
 
