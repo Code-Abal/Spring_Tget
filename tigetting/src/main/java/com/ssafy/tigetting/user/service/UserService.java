@@ -15,17 +15,11 @@ public class UserService {
     }
 
     public UserEntity resolveUserFromEmail(String userEmail) {
-//        if (userEmail.contains("@")) {
-            // 이메일로 사용자 찾기
-            UserEntity user = userMapper.findByEmail(userEmail)
-                    .orElseThrow(() -> new UsernameNotFoundException("해당 이메일의 사용자를 찾을 수 없습니다: " + userEmail));
+        // 이메일로 사용자 찾기
+        UserEntity user = userMapper.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("해당 이메일의 사용자를 찾을 수 없습니다: " + userEmail));
 
-            return user;
-//        } else {
-//            User user = userMapper.findByUsername(userEmail)
-//                    .orElseThrow(() -> new UsernameNotFoundException("해당 사용자명을 찾을 수 없습니다: " + usernameOrEmail));
-//            return user.getRole().getRoleName();
-//        }
+        return user;
     }
 
     /**
@@ -33,12 +27,10 @@ public class UserService {
      */
     public String getUserRole(String email) {
         UserEntity user = userMapper.findByEmail(email)
-            .orElseThrow(() ->
-                    new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + email)
-            );
+                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + email));
 
-    return user.getRole().getName();
-}
+        return user.getRole().getName();
+    }
 
     /**
      * 사용자 정보 조회

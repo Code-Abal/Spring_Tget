@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.tigetting.dto.tget.UserRegisterDto;
+import com.ssafy.tigetting.dto.tget.UserUpdateDto;
+
 @Tag(name = "UserAuth", description = "사용자 로그인/로그아웃 API")
 @RestController
 @RequestMapping("/auth")
@@ -45,7 +48,24 @@ public class AuthController {
     })
     @PostMapping("/login")
     public AuthResponse login(@Valid @RequestBody LoginRequest dto) {
+        System.out.println("로그인 시도 들어옴");
         return authService.login(dto);
+    }
+
+    @PostMapping("/signup")
+    public AuthResponse signup(@Valid @RequestBody UserRegisterDto dto) {
+        System.out.println("회원가입 시도 들어옴");
+        return authService.signup(dto);
+    }
+
+    @PostMapping("/modify")
+    public AuthResponse modify(@Valid @RequestBody UserUpdateDto dto) {
+        System.out.println("회원정보 수정 시도 들어옴");
+        System.out.println("Email: " + dto.getEmail());
+        System.out.println("Name: " + dto.getName());
+        System.out.println("Phone: " + dto.getPhone());
+        System.out.println("Has Password: " + (dto.getPassword() != null && !dto.getPassword().isEmpty()));
+        return authService.modify(dto);
     }
 
     @Operation(

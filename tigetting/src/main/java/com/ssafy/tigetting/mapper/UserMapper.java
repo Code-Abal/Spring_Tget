@@ -1,13 +1,16 @@
 package com.ssafy.tigetting.mapper;
 
-import com.ssafy.tigetting.user.entity.UserEntity;
+import java.util.Optional;
+
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Optional;
+import com.ssafy.tigetting.user.entity.UserEntity;
 
 @Mapper
 public interface UserMapper {
     void save(UserEntity user);
+
+    void modify(UserEntity user);
 
     Optional<UserEntity> findById(Long id);
 

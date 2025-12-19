@@ -1,11 +1,11 @@
 package com.ssafy.tigetting.dto.tget;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 /**
  * 사용자 정보 조회용 DTO

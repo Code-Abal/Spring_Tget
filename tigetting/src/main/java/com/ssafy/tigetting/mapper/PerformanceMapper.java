@@ -1,22 +1,32 @@
 package com.ssafy.tigetting.mapper;
 
-import com.ssafy.tigetting.entity.Performance;
-import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.ssafy.tigetting.dto.tget.PerformanceDto;
+import com.ssafy.tigetting.dto.tget.PerformanceDetailDto;
+
 @Mapper
 public interface PerformanceMapper {
-    void save(Performance performance);
+    
+    /*
+        void save(Performance performance);
 
-    void update(Performance performance);
+        void update(Performance performance);
 
-    Optional<Performance> findById(Long id);
+        Optional<Performance> findById(Long id);
 
-    List<Performance> findAll();
+        List<Performance> findAll();
 
-    List<Performance> findByVenueId(Long venueId);
+        List<Performance> findByVenueId(Long venueId);
 
-    void deleteById(Long id);
+        void deleteById(Long id);    
+    */
+    Optional<PerformanceDto> findById(String id);
+
+    List<PerformanceDto> findAll();
+    
+    Optional<PerformanceDetailDto> findDetailById(String id);
 }
