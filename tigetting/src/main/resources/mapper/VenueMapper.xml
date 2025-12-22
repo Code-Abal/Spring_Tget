@@ -28,6 +28,23 @@
         SELECT * FROM venues
     </select>
 
+    <select id="findByArea" resultType="com.ssafy.tigetting.dto.tget.VenueDto">
+        SELECT 
+            mt10id,
+            fcltynm,
+            sidonm,
+            gugunnm,
+            mt13cnt,
+            fcltychartr
+        FROM venues 
+        WHERE sidonm LIKE CONCAT('%', #{area}, '%')
+        ORDER BY fcltynm
+    </select>
+
+    <select id="findAllAreas" resultType="String">
+        SELECT DISTINCT sidonm FROM venues WHERE sidonm IS NOT NULL ORDER BY sidonm
+    </select>
+
     <delete id="deleteById">
         DELETE FROM venues WHERE venue_id = #{id}
     </delete>

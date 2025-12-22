@@ -31,6 +31,6 @@ public class UserDto {
     private LocalDateTime register; // 가입일
 
     public enum Role {
-        USER, ADMIN
+        USER, ADMIN, BUSINESS
     }
 }

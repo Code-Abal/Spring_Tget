@@ -1,5 +1,6 @@
 package com.ssafy.tigetting.venue.service;
 
+import com.ssafy.tigetting.dto.tget.VenueDto;
 import com.ssafy.tigetting.mapper.VenueMapper;
 import com.ssafy.tigetting.venue.entity.Venue;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,16 @@ public class VenueService {
         return venueMapper.findAll().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    // 지역별 공연장 조회
+    public List<VenueDto> getVenuesByArea(String area) {
+        return venueMapper.findByArea(area);
+    }
+
+    // 모든 지역 목록 조회
+    public List<String> getAllAreas() {
+        return venueMapper.findAllAreas();
     }
 
     // 공연장 ID로 조회

@@ -16,9 +16,9 @@ import java.util.List;
 @Builder
 public class Venue {
 
-    private Long venueId;
+    private String venueId;  // mt10id (String)
 
-    private String venueName;
+    private String venueName;  // fcltynm
 
     private String address;
 
@@ -32,6 +32,14 @@ public class Venue {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    // KOPIS venues 테이블 필드
+    private String mt10id;
+    private String fcltynm;
+    private String mt13cnt;
+    private String fcltychartr;
+    private String sidonm;
+    private String gugunnm;
 
     private List<Performance> performances;
 

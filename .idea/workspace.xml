@@ -6,13 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="03c6254b-39aa-46e6-a8f5-543d1c950438" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_3_0_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_3_0_5.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/auth/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/auth/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/auth/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/controller/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/controller/PageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/dto/tget/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/dto/tget/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/dto/tget/UserUpdateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/dto/tget/UserUpdateDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/global/security/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/global/security/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/global/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/global/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/mapper/VenueMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/mapper/VenueMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/performance/controller/PerformanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/performance/controller/PerformanceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/performance/service/PerformanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/performance/service/PerformanceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/controller/VenueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/controller/VenueController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/entity/Venue.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/entity/Venue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/service/VenueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/service/VenueService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/db/insert_all_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/db/insert_all_data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/VenueMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/VenueMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +129,7 @@
       <updated>1764920146354</updated>
       <workItem from="1764920147686" duration="8845000" />
       <workItem from="1765430733942" duration="46977000" />
-      <workItem from="1766024534361" duration="5528000" />
+      <workItem from="1766024534361" duration="35215000" />
     </task>
     <servers />
   </component>

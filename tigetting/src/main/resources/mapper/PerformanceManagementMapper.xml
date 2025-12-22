@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.tigetting.mapper.PerformanceManagementMapper">
+
+    <!-- 기업회원이 등록한 공연 목록 조회 -->
+    <select id="findByUserId" resultType="com.ssafy.tigetting.dto.tget.PerformanceDto">
+        SELECT 
+            p.mt20id,
+            p.prfnm,
+            p.prfpdfrom,
+            p.prfpdto,
+            p.fcltynm,
+            p.poster,
+            p.area,
+            p.genreid,
+            g.genrenm as genreName,
+            p.prfstate,
+            p.mt10id
+        FROM performances p
+        LEFT JOIN genres g ON p.genreid = g.genreid
+        WHERE p.userid = #{userId}
+        ORDER BY p.prfpdfrom DESC
+    </select>
+
+    <!-- 공연 등록 -->
+    <insert id="insertPerformance">
+        INSERT INTO performances (
+            mt20id, prfnm, prfpdfrom, prfpdto, fcltynm, 
+            area, genreid, prfstate, mt10id, userid, 
+            poster_image, poster_type
+        ) VALUES (
+            #{mt20id}, #{prfnm}, #{prfpdfrom}, #{prfpdto}, #{fcltynm},
+            #{area}, 
+            (SELECT genreid FROM genres WHERE genrenm = #{genreName}),
+            #{prfstate}, #{mt10id}, #{userId},
+            #{posterImage}, #{posterType}
+        )
+    </insert>
+
+    <!-- 공연 수정 -->
+    <update id="updatePerformance">
+        UPDATE performances 
+        SET 
+            prfnm = #{prfnm},
+            prfpdfrom = #{prfpdfrom},
+            prfpdto = #{prfpdto},
+            fcltynm = #{fcltynm},
+            area = #{area},
+            genreid = (SELECT genreid FROM genres WHERE genrenm = #{genreName}),
+            prfstate = #{prfstate},
+            mt10id = #{mt10id}
+            <if test="posterImage != null">
+                , poster_image = #{posterImage}
+            </if>
+            <if test="posterType != null">
+                , poster_type = #{posterType}
+            </if>
+        WHERE mt20id = #{mt20id} AND userid = #{userId}
+    </update>
+
+    <!-- 공연 삭제 (본인 것만) -->
+    <delete id="deletePerformance">
+        DELETE FROM performances 
+        WHERE mt20id = #{mt20id} AND userid = #{userId}
+    </delete>
+
+    <!-- 포스터 정보 조회 -->
+    <select id="findPosterById" resultType="com.ssafy.tigetting.dto.tget.PerformanceDto">
+        SELECT mt20id, poster 
+        FROM performances 
+        WHERE mt20id = #{mt20id}
+    </select>
+
+    <!-- 포스터 이미지 바이너리 조회 -->
+    <select id="findPosterImageById" resultType="string">
+        SELECT HEX(poster_image) 
+        FROM performances 
+        WHERE mt20id = #{mt20id}
+    </select>
+
+    <!-- 포스터 타입 조회 -->
+    <select id="findPosterTypeById" resultType="string">
+        SELECT poster_type 
+        FROM performances 
+        WHERE mt20id = #{mt20id}
+    </select>
+
+    <!-- ID 존재 여부 확인 -->
+    <select id="existsById" resultType="boolean">
+        SELECT COUNT(*) > 0 FROM performances WHERE mt20id = #{mt20id}
+    </select>
+
+</mapper>

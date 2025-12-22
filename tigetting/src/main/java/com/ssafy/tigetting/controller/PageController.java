@@ -1,14 +1,14 @@
 package com.ssafy.tigetting.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.io.IOException;
-import java.nio.file.Files;
 
 @Controller
 public class PageController {
