@@ -5353,9 +5353,11 @@ ON DUPLICATE KEY UPDATE
 -- ================================================
 -- 7. 회원 권한 INSERT
 -- ================================================
+
 INSERT INTO roles (roleid, name) VALUES
-(1, '관리자'),
-(2, '일반회원')
+(1, 'ADMIN'),
+(2, 'USER'),
+(3, 'BUSNIESS')
 ON DUPLICATE KEY UPDATE name = VALUES(name);
 
 -- ================================================
