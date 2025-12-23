@@ -25,7 +25,7 @@ public class VenueDto {
 
     private Integer mt13cnt; // 공연장 내 공연장 수
 
-    private String fcltychartr; // 시설 특성
+    //private String fcltychartr; // 시설 특성
 
     private String sidonm; // 시도명
 

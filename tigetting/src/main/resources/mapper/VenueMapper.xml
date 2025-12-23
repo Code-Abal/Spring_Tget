@@ -68,4 +68,20 @@
         SELECT COUNT(*) > 0 FROM venues WHERE venue_id = #{id}
     </select>
 
+    <select id="findByVenueId" resultType="com.ssafy.tigetting.venue.dto.VenueDto">
+        SELECT
+            v.mt10id,
+            v.fcltynm,
+            v.sidonm,
+            v.gugunnm,
+            v.region,
+            v.la,
+            v.lo,
+            vd.seatscale,
+            vd.adres
+        FROM venues v
+        LEFT JOIN venue_details vd ON v.mt10id = vd.mt10id
+        WHERE v.mt10id = #{mt10id}
+    </select>
+
 </mapper>

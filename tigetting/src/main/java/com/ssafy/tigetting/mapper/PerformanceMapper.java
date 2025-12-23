@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.ssafy.tigetting.performance.dto.PerformanceDto;
 import com.ssafy.tigetting.performance.dto.PerformanceDetailDto;
@@ -29,4 +30,11 @@ public interface PerformanceMapper {
     List<PerformanceDto> findAll();
     
     Optional<PerformanceDetailDto> findDetailById(String id);
+
+    // 공연장별, 장르별, 권역별 필터링 공연 조회
+    List<PerformanceDto> findByVenueIdAndFilters(
+        @Param("mt10id") String mt10id,
+        @Param("genreId") Integer genreId,
+        @Param("region") String region
+    );
 }

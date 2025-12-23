@@ -5,6 +5,8 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-keyvalue/3.5.6/fdb7fb4e17a6b58bf79ecfb721b01c24242576ae/spring-data-keyvalue-3.5.6.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-keyvalue/3.5.6/49ab30c51f58dc8941f5e2a27f05015885bfe4b0/spring-data-keyvalue-3.5.6-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

@@ -5,6 +5,8 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mybatis.spring.boot/mybatis-spring-boot-starter-test/3.0.5/ecf01ee69a6b9f236d25b1811b52c2ce0faa5a16/mybatis-spring-boot-starter-test-3.0.5.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mybatis.spring.boot/mybatis-spring-boot-starter-test/3.0.5/2ff1ebf51daf35eca153d312578b016edab2f6d6/mybatis-spring-boot-starter-test-3.0.5-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

@@ -5,6 +5,8 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-redis/3.5.8/7ea266af7c8dad21d2814d4f6c13a970c93840ce/spring-boot-starter-data-redis-3.5.8.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-redis/3.5.8/7ea266af7c8dad21d2814d4f6c13a970c93840ce/spring-boot-starter-data-redis-3.5.8-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

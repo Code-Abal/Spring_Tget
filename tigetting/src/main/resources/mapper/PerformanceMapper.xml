@@ -39,6 +39,8 @@
             p.mt10id
         FROM performances p
         LEFT JOIN genres g ON p.genreid = g.genreid
+        ORDER BY p.prfpdfrom DESC
+        LIMIT 100
     </select>
 
     <select id="findById" resultType="com.ssafy.tigetting.performance.dto.PerformanceDto">
@@ -117,6 +119,28 @@
     <delete id="deleteById">
         DELETE FROM performances WHERE performance_id = #{id}
     </delete>
+
+    <select id="findByVenueIdAndFilters" resultType="com.ssafy.tigetting.performance.dto.PerformanceDto">
+        SELECT
+            p.mt20id,
+            p.prfnm,
+            p.prfpdfrom,
+            p.prfpdto,
+            p.fcltynm,
+            p.poster,
+            p.area,
+            g.genrenm as genreName,
+            p.prfstate,
+            p.mt10id
+        FROM performances p
+        LEFT JOIN genres g ON p.genreid = g.genreid
+        WHERE p.mt10id = #{mt10id}
+        <if test="genreId != null">
+            AND p.genreid = #{genreId}
+        </if>
+        ORDER BY p.prfpdfrom DESC
+        LIMIT 100
+    </select>
 
     <resultMap id="PerformanceResultMap" type="Performance">
         <id property="performanceId" column="performance_id"/>

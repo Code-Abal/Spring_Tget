@@ -5,6 +5,8 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-oxm/6.2.14/353401f00580cb978d76c1bcfda5a391dab6e1b4/spring-oxm-6.2.14.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-oxm/6.2.14/77eb9e915b4ce652eb9b47b261d00cfc77171751/spring-oxm-6.2.14-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

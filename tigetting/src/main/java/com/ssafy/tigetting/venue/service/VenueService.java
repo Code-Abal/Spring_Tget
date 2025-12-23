@@ -2,8 +2,11 @@ package com.ssafy.tigetting.venue.service;
 
 import com.ssafy.tigetting.venue.dto.VenueRequest;
 import com.ssafy.tigetting.venue.dto.VenueDto;
+import com.ssafy.tigetting.venue.dto.VenueDetailResponseDto;
 import com.ssafy.tigetting.venue.mapper.VenueMapper;
 import com.ssafy.tigetting.venue.entity.Venue;
+import com.ssafy.tigetting.mapper.PerformanceMapper;
+import com.ssafy.tigetting.performance.dto.PerformanceDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +19,7 @@ import java.util.List;
 public class VenueService {
 
     private final VenueMapper venueMapper;
+    private final PerformanceMapper performanceMapper;
 
     // 모든 공연장 조회
     public List<Venue> getAllVenues() {
@@ -36,6 +40,29 @@ public class VenueService {
     // 모든 지역 목록 조회
     public List<String> getAllAreas() {
         return venueMapper.findAllAreas();
+    }
+
+    // 공연장 상세정보 및 공연 목록 조회
+    public VenueDetailResponseDto getVenueDetail(String mt10id, Integer genreId, String region) {
+        System.out.println("🔍 공연장 상세정보 조회 - mt10id: " + mt10id + ", genreId: " + genreId + ", region: " + region);
+
+        // 공연장 정보 조회
+        VenueDto venue = venueMapper.findByVenueId(mt10id);
+        if (venue == null) {
+            throw new RuntimeException("공연장을 찾을 수 없습니다. mt10id: " + mt10id);
+        }
+
+        System.out.println("✅ 공연장 정보: " + venue.getFcltynm());
+
+        // 해당 공연장의 공연 목록 조회 (필터 적용)
+        List<PerformanceDto> performances = performanceMapper.findByVenueIdAndFilters(mt10id, genreId, region);
+
+        System.out.println("✅ 공연장 상세정보 조회 완료 - " + venue.getFcltynm() + ", 공연 수: " + performances.size());
+
+        return VenueDetailResponseDto.builder()
+                .venue(venue)
+                .performances(performances)
+                .build();
     }
 
     // 공연장 ID로 조회

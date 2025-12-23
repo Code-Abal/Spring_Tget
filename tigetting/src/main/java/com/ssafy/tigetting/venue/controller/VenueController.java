@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.ssafy.tigetting.venue.dto.VenueDto;
+import com.ssafy.tigetting.venue.dto.VenueDetailResponseDto;
 import com.ssafy.tigetting.venue.entity.Venue;
 import com.ssafy.tigetting.venue.service.VenueService;
 
@@ -44,6 +45,18 @@ public class VenueController {
         System.out.println("✅ 조회된 지역 수: " + areas.size());
         System.out.println("📍 지역 목록: " + areas);
         return ResponseEntity.ok(areas);
+    }
+
+    // 공연장 상세정보 및 공연 목록 조회
+    @GetMapping("/detail/{mt10id}")
+    public ResponseEntity<VenueDetailResponseDto> getVenueDetail(
+            @PathVariable String mt10id,
+            @RequestParam(required = false) Integer genreId,
+            @RequestParam(required = false) String region) {
+        System.out.println("🔍 공연장 상세정보 조회 요청 - mt10id: " + mt10id + ", genreId: " + genreId + ", region: " + region);
+        VenueDetailResponseDto detail = venueService.getVenueDetail(mt10id, genreId, region);
+        System.out.println("✅ 공연장 상세정보 조회 완료 - " + detail.getVenue().getFcltynm() + ", 공연 수: " + detail.getPerformances().size());
+        return ResponseEntity.ok(detail);
     }
 
     // 특정 공연장 조회

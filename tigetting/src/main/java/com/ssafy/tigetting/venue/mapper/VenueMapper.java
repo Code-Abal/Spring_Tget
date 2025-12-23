@@ -30,4 +30,6 @@ public interface VenueMapper {
     void deleteById(Long id);
 
     boolean existsById(Long id);
+
+    VenueDto findByVenueId(String mt10id);
 }
