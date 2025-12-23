@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="03c6254b-39aa-46e6-a8f5-543d1c950438" name="변경" comment="파일구조 변경">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/tigetting.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/db/insert_all_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/db/insert_all_data.sql" afterDir="false" />
-    </list>
+    <list default="true" id="03c6254b-39aa-46e6-a8f5-543d1c950438" name="변경" comment="파일구조 변경" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
