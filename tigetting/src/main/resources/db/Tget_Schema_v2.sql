@@ -46,6 +46,8 @@ CREATE TABLE venues (
     fcltychartr VARCHAR(100) COMMENT '시설 특성',
     sidonm VARCHAR(50) COMMENT '시도명',
     gugunnm VARCHAR(50) COMMENT '구군명',
+    la DECIMAL(10, 7) COMMENT '위도',
+    lo DECIMAL(10, 7) COMMENT '경도',
     region VARCHAR(20) COMMENT '권역'
 );
 
@@ -54,13 +56,30 @@ CREATE TABLE venue_details (
     mt10id VARCHAR(100) PRIMARY KEY COMMENT '공연장 ID',
     adres VARCHAR(500) COMMENT '주소',
     telno VARCHAR(50) COMMENT '전화번호',
-    la DECIMAL(10, 7) COMMENT '위도',
-    lo DECIMAL(10, 7) COMMENT '경도',
     seatscale INT COMMENT '좌석수',
     
     CONSTRAINT fk_venue_detail_venue 
         FOREIGN KEY (mt10id) REFERENCES venues(mt10id)
         ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- 회원 권한 테이블
+CREATE TABLE roles (
+	roleid INT NOT NULL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+-- 회원 정보 테이블
+CREATE TABLE users (
+	userid INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '기본 생성 id',
+    email VARCHAR(255) NOT NULL COMMENT '이메일',
+    password VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 스프링에서 encoding 돼서 처리.
+    name VARCHAR(255) NOT NULL COMMENT '이름',
+    phone VARCHAR(50) NOT NULL COMMENT '전화번호',
+    roleid INT NOT NULL COMMENT '권한',
+    register DATETIME NOT NULL COMMENT '가입일',
+    
+    CONSTRAINT fk_user_role FOREIGN KEY (roleid) REFERENCES roles(roleid)
 );
 
 -- 공연 기본 정보 테이블
@@ -85,8 +104,6 @@ CREATE TABLE performances (
     CONSTRAINT fk_performance_user FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
-ALTER TABLE performances 
-ADD COLUMN user_id INT NULL; 
 
 -- 공연 상세 정보 테이블 (1:1 관계)
 CREATE TABLE performance_details (
@@ -115,25 +132,6 @@ CREATE TABLE performance_styurls (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- 회원 권한 테이블
-CREATE TABLE roles (
-	roleid INT NOT NULL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
-);
-
--- 회원 정보 테이블
-CREATE TABLE users (
-	userid INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '기본 생성 id',
-    email VARCHAR(255) NOT NULL COMMENT '이메일',
-    password VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 스프링에서 encoding 돼서 처리.
-    name VARCHAR(255) NOT NULL COMMENT '이름',
-    phone VARCHAR(50) NOT NULL COMMENT '전화번호',
-    roleid INT NOT NULL COMMENT '권한',
-    register DATETIME NOT NULL COMMENT '가입일',
-    
-    CONSTRAINT fk_user_role FOREIGN KEY (roleid) REFERENCES roles(roleid)
-);
-
 -- 회원 공연 내역 테이블
 CREATE TABLE users_performances (
 	userid INT PRIMARY KEY COMMENT '기본 생성 id',
@@ -142,6 +140,7 @@ CREATE TABLE users_performances (
     CONSTRAINT fk_user_performance_performance FOREIGN KEY (mt20id) REFERENCES performances(mt20id),
     CONSTRAINT fk_user_performance_user FOREIGN KEY (userid) REFERENCES users(userid)
 );
+
 
 -- 인덱스 생성 (조회 성능 향상)
 CREATE INDEX idx_perf_genre ON performances(genreid);
