@@ -5365,7 +5365,8 @@ ON DUPLICATE KEY UPDATE name = VALUES(name);
 -- ================================================
 INSERT INTO users (email, password, name, phone, roleid, register) VALUES
 ('admin@ssafy.com', '1234', '관리자', '010-1111-1111', 1, now()),
-('user@ssafy.com', '1234', '일반회원', '010-1111-1111', 2, now())
+('user@ssafy.com', '1234', '일반회원', '010-1111-1111', 2, now()),
+('test@test.com', '$2a$10$Q4wdLojb6ARQBCcroqvJ5O86YbSF2.oML3T8yqTvch97Wt/FLIyWq', '일반회원', '010-1111-1111', 2, now())
 ON DUPLICATE KEY UPDATE 
     password = VALUES(password),
     name = VALUES(name),

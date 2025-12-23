@@ -5,22 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03c6254b-39aa-46e6-a8f5-543d1c950438" name="변경" comment="파일구조 변경">
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/tigetting.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/dto/tget/VenueDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/dto/VenueDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/mapper/VenueMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/mapper/VenueMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/performance/controller/PerformanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/performance/controller/PerformanceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/performance/service/PerformanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/performance/service/PerformanceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/controller/VenueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/controller/VenueController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/entity/Venue.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/entity/Venue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/service/VenueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/java/com/ssafy/tigetting/venue/service/VenueService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/db/Tget_Schema_v2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/db/Tget_Schema_v2.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/PerformanceMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/PerformanceMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/VenueMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/VenueMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/VenueSeatMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/mapper/VenueSeatMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tigetting/src/main/resources/db/insert_all_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tigetting/src/main/resources/db/insert_all_data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +80,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.tigetting [:com.ssafy.tigetting.TigettingApplication.main()].executor": "Run",
     "Gradle.tigetting 빌드.executor": "Run",
+    "Gradle.tigetting.executor": "Run",
     "Gradle.소스 다운로드.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RequestMappingsPanelOrder0": "0",
@@ -97,6 +90,7 @@
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -104,13 +98,13 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/dohyung/Desktop/project/SSAFY/Vue_Tget",
+    "last_opened_file_path": "C:/SSAFY/project/framework_tigetting_t10",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -128,14 +122,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
