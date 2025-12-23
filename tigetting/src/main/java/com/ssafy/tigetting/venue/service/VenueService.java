@@ -1,5 +1,6 @@
 package com.ssafy.tigetting.venue.service;
 
+import com.ssafy.tigetting.venue.dto.VenueRequest;
 import com.ssafy.tigetting.venue.dto.VenueDto;
 import com.ssafy.tigetting.venue.mapper.VenueMapper;
 import com.ssafy.tigetting.venue.entity.Venue;
@@ -27,8 +28,8 @@ public class VenueService {
     }
 
     // 권역별 공연장 조회 (공연 개수가 1개 이상인 경우만)
-    public List<VenueDto> getVenuesByRegion(String region) {
-        return venueMapper.findByRegion(region);
+    public List<VenueDto> getVenuesByRegion(String region, Integer genreId) {
+        return venueMapper.findByRegion(region, genreId);
     }
 
     // 모든 지역 목록 조회

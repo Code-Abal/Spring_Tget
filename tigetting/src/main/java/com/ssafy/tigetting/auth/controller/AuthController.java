@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.tigetting.dto.tget.UserRegisterDto;
-import com.ssafy.tigetting.dto.tget.UserUpdateDto;
+import com.ssafy.tigetting.user.dto.UserRegisterDto;
+import com.ssafy.tigetting.user.dto.UserUpdateDto;
 import com.ssafy.tigetting.global.security.TokenExtractor;
 
 @Tag(name = "UserAuth", description = "사용자 로그인/로그아웃 API")

@@ -1,5 +1,7 @@
 package com.ssafy.tigetting.user.service;
 
+import com.ssafy.tigetting.global.exception.AuthException;
+import com.ssafy.tigetting.global.exception.ErrorCode;
 import com.ssafy.tigetting.mapper.UserMapper;
 import com.ssafy.tigetting.user.entity.UserEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,20 +16,20 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
+    // 이메일로 사용자 찾기
     public UserEntity resolveUserFromEmail(String userEmail) {
         // 이메일로 사용자 찾기
-        UserEntity user = userMapper.findByEmail(userEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("해당 이메일의 사용자를 찾을 수 없습니다: " + userEmail));
-
-        return user;
+        return userMapper.findByEmail(userEmail)
+                .orElseThrow(() -> new AuthException(ErrorCode.USER_NOT_FOUND)); // USER_NOT_FOUND 에러 코드 사용
     }
 
     /**
      * 사용자 역할 정보 반환
      */
     public String getUserRole(String email) {
+        // 이메일로 사용자 정보 찾기
         UserEntity user = userMapper.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + email));
+                .orElseThrow(() -> new AuthException(ErrorCode.USER_NOT_FOUND)); // USER_NOT_FOUND 에러 코드 사용
 
         return user.getRole().getName();
     }
@@ -37,7 +39,7 @@ public class UserService {
      */
     public UserEntity findByUsername(String username) {
         return userMapper.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + username));
+                .orElseThrow(() -> new AuthException(ErrorCode.USER_NOT_FOUND)); // USER_NOT_FOUND 에러 코드 사용
     }
 
     /**
@@ -45,6 +47,6 @@ public class UserService {
      */
     public UserEntity findByEmail(String email) {
         return userMapper.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("해당 이메일의 사용자를 찾을 수 없습니다: " + email));
+                .orElseThrow(() -> new AuthException(ErrorCode.USER_NOT_FOUND)); // USER_NOT_FOUND 에러 코드 사용
     }
 }

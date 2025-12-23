@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.ssafy.tigetting.venue.dto.VenueDto;
 import com.ssafy.tigetting.venue.entity.Venue;
@@ -20,7 +21,7 @@ public interface VenueMapper {
 
     List<VenueDto> findByArea(String area);
 
-    List<VenueDto> findByRegion(String region);
+    List<VenueDto> findByRegion(@Param("region") String region, @Param("genreId") Integer genreId);
 
     List<String> findAllAreas();
 

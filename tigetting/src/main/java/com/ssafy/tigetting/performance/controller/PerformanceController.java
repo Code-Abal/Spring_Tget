@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.tigetting.dto.tget.PerformanceDetailDto;
-import com.ssafy.tigetting.dto.tget.PerformanceDto;
+import com.ssafy.tigetting.performance.dto.PerformanceDetailDto;
+import com.ssafy.tigetting.performance.dto.PerformanceDto;
 import com.ssafy.tigetting.global.security.JwtUtil;
 import com.ssafy.tigetting.performance.service.PerformanceService;
 

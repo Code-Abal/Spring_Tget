@@ -1,4 +1,4 @@
-package com.ssafy.tigetting.dto.tget;
+package com.ssafy.tigetting.user.dto;
 
 import java.time.LocalDateTime;
 
@@ -6,7 +6,6 @@ import com.ssafy.tigetting.user.entity.UserEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

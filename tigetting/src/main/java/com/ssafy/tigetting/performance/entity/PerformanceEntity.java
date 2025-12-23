@@ -1,4 +1,4 @@
-package com.ssafy.tigetting.entity.tget;
+package com.ssafy.tigetting.performance.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

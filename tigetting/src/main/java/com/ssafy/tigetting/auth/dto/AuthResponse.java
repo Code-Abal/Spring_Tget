@@ -1,6 +1,6 @@
 package com.ssafy.tigetting.auth.dto;
 
-import com.ssafy.tigetting.dto.tget.UserDto;
+import com.ssafy.tigetting.user.dto.UserDto;
 import com.ssafy.tigetting.user.entity.UserEntity;
 
 import lombok.AllArgsConstructor;

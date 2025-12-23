@@ -1,7 +1,6 @@
-package com.ssafy.tigetting.dto.tget;
+package com.ssafy.tigetting.user.dto;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -10,28 +9,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 회원가입 요청 DTO
- * - userId, register 필드 없음 (서버가 생성)
- * - Validation 어노테이션 포함
+ * 사용자 정보 수정 요청 DTO
+ * - 이메일, 이름, 전화번호는 필수
+ * - 비밀번호는 선택사항 (변경 시에만)
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserRegisterDto {
+public class UserUpdateDto {
 
-    @NotBlank(message = "이메일을 입력해주세요")
     @Email(message = "올바른 이메일 형식이 아닙니다")
     private String email;
 
-    @NotBlank(message = "비밀번호를 입력해주세요")
+    // 현재 비밀번호 (비밀번호 변경 시에만 필요)
+    private String currentPassword;
+
+    // 새 비밀번호 (선택사항)
     @Size(min = 8, message = "비밀번호는 최소 8자 이상이어야 합니다")
     private String password;
 
-    @NotBlank(message = "이름을 입력해주세요")
     private String name;
 
-    @NotBlank(message = "전화번호를 입력해주세요")
     @Pattern(regexp = "^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$", message = "올바른 전화번호 형식이 아닙니다")
     private String phone;
 }

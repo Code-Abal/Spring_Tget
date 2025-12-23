@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
+import com.ssafy.tigetting.global.exception.AuthException;
+import com.ssafy.tigetting.global.exception.ErrorCode;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ssafy.tigetting.dto.tget.PerformanceDetailDto;
-import com.ssafy.tigetting.dto.tget.PerformanceDto;
+import com.ssafy.tigetting.performance.dto.PerformanceDetailDto;
+import com.ssafy.tigetting.performance.dto.PerformanceDto;
 import com.ssafy.tigetting.mapper.PerformanceManagementMapper;
 import com.ssafy.tigetting.mapper.PerformanceMapper;
 import com.ssafy.tigetting.mapper.UserMapper;
@@ -31,23 +33,26 @@ public class PerformanceService {
     public List<PerformanceDto> getAllPerformances() {
         List<PerformanceDto> performances = performanceMapper.findAll();
         System.out.println("조회된 공연 수: " + performances.size());
+        if (performances.isEmpty()) {
+            throw new AuthException(ErrorCode.PERFORMANCE_NOT_FOUND); // 공연이 없으면 예외 발생
+        }
         return performances;
     }
 
     public PerformanceDetailDto getPerformanceDetail(String id) {
         return performanceMapper.findDetailById(id)
-            .orElseThrow(() -> new RuntimeException("공연을 찾을 수 없습니다: " + id));
+                .orElseThrow(() -> new AuthException(ErrorCode.PERFORMANCE_NOT_FOUND)); // 공연을 찾을 수 없을 때 예외 발생
     }
 
     public PerformanceDetailDto getQueue(String id) {
         return performanceMapper.findDetailById(id)
-            .orElseThrow(() -> new RuntimeException("공연을 찾을 수 없습니다: " + id));
+            .orElseThrow(() -> new AuthException(ErrorCode.PERFORMANCE_NOT_FOUND)); // 공연을 찾을 수 없을 때 예외 발생
     }
 
     public List<PerformanceDto> getMyPerformances(String email) {
         Integer userId = userMapper.findByEmail(email)
-            .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다: " + email))
-            .getUserId();
+                .orElseThrow(() -> new AuthException(ErrorCode.PERFORMANCE_NOT_FOUND)) // 사용자를 찾을 수 없을 때 예외 발생
+                .getUserId();
         return performanceManagementMapper.findByUserId(userId);
     }
 
@@ -58,8 +63,8 @@ public class PerformanceService {
         try {
             // 사용자 조회
             Integer userId = userMapper.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다: " + email))
-                .getUserId();
+                    .orElseThrow(() -> new AuthException(ErrorCode.PERFORMANCE_NOT_FOUND)) // 사용자 찾을 수 없음
+                    .getUserId();
 
             // 고유 ID 생성 (PF900000 ~ PF999999)
             String mt20id = generateUniquePerformanceId();
@@ -101,7 +106,7 @@ public class PerformanceService {
                 .mt10id(mt10id)
                 .build();
         } catch (IOException e) {
-            throw new RuntimeException("이미지 처리 중 오류 발생", e);
+            throw new AuthException(ErrorCode.IMAGE_PROCESSING_FAILED); // 이미지 처리 중 오류 발생
         }
     }
 
@@ -112,8 +117,8 @@ public class PerformanceService {
         try {
             // 사용자 조회
             Integer userId = userMapper.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다: " + email))
-                .getUserId();
+                    .orElseThrow(() -> new AuthException(ErrorCode.PERFORMANCE_NOT_FOUND)) // 사용자 찾을 수 없음
+                    .getUserId();
 
             // 날짜 파싱
             LocalDate prfpdFromDate = LocalDate.parse(prfpdfrom);
@@ -156,27 +161,25 @@ public class PerformanceService {
                 .mt10id(mt10id)
                 .build();
         } catch (IOException e) {
-            throw new RuntimeException("이미지 처리 중 오류 발생", e);
+            throw new AuthException(ErrorCode.IMAGE_PROCESSING_FAILED); // 이미지 처리 중 오류 발생
         }
     }
 
     @Transactional
     public void deletePerformance(String email, String mt20id) {
         Integer userId = userMapper.findByEmail(email)
-            .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다: " + email))
-            .getUserId();
+                .orElseThrow(() -> new AuthException(ErrorCode.PERFORMANCE_NOT_FOUND)) // 사용자 찾을 수 없음
+                .getUserId();
         
         performanceManagementMapper.deletePerformance(mt20id, userId);
     }
 
     public ResponseEntity<byte[]> getPoster(String mt20id) {
         System.out.println("🖼️ 포스터 조회 요청 - ID: " + mt20id);
-        
+
         PerformanceDto performance = performanceManagementMapper.findPosterById(mt20id)
-            .orElseThrow(() -> {
-                System.out.println("❌ 공연을 찾을 수 없음: " + mt20id);
-                return new RuntimeException("공연을 찾을 수 없습니다: " + mt20id);
-            });
+                .orElseThrow(() -> new AuthException(ErrorCode.PERFORMANCE_NOT_FOUND)); // 공연을 찾을 수 없음
+
 
         //System.out.println("✅ 공연 찾음 - poster 필드: " + performance.getPoster());
 
@@ -201,12 +204,12 @@ public class PerformanceService {
             System.out.println("❌ BLOB 조회 실패: " + e.getClass().getName());
             System.out.println("❌ 에러 메시지: " + e.getMessage());
             e.printStackTrace();
-            throw new RuntimeException("포스터 이미지 조회 실패: " + e.getMessage(), e);
+            throw new AuthException(ErrorCode.PERFORMANCE_NOT_FOUND); // 포스터 이미지 조회 실패
         }
         
         if (posterImage == null || posterImage.length == 0) {
             System.out.println("❌ 포스터 이미지가 없거나 비어있음");
-            throw new RuntimeException("포스터 이미지가 없습니다: " + mt20id);
+            throw new AuthException(ErrorCode.POSTER_NOT_FOUND); // 포스터 이미지 없음
         }
 
         String contentType = performanceManagementMapper.findPosterTypeById(mt20id);

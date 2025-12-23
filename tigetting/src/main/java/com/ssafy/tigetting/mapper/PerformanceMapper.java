@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.ssafy.tigetting.dto.tget.PerformanceDto;
-import com.ssafy.tigetting.dto.tget.PerformanceDetailDto;
+import com.ssafy.tigetting.performance.dto.PerformanceDto;
+import com.ssafy.tigetting.performance.dto.PerformanceDetailDto;
 
 @Mapper
 public interface PerformanceMapper {

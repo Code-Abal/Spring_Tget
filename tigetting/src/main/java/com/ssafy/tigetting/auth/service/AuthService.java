@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.tigetting.auth.dto.AuthResponse;
 import com.ssafy.tigetting.auth.dto.LoginRequest;
-import com.ssafy.tigetting.dto.tget.UserDto;
-import com.ssafy.tigetting.dto.tget.UserRegisterDto;
-import com.ssafy.tigetting.dto.tget.UserUpdateDto;
+import com.ssafy.tigetting.user.dto.UserDto;
+import com.ssafy.tigetting.user.dto.UserRegisterDto;
+import com.ssafy.tigetting.user.dto.UserUpdateDto;
 import com.ssafy.tigetting.global.exception.AuthException;
 import com.ssafy.tigetting.global.exception.BusinessException;
 import com.ssafy.tigetting.global.exception.ErrorCode;

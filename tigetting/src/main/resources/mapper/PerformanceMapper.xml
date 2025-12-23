@@ -25,7 +25,7 @@
         WHERE performance_id = #{performanceId}
     </update>
 
-    <select id="findAll" resultType="com.ssafy.tigetting.dto.tget.PerformanceDto">
+    <select id="findAll" resultType="com.ssafy.tigetting.performance.dto.PerformanceDto">
         SELECT 
             p.mt20id,
             p.prfnm,
@@ -41,7 +41,7 @@
         LEFT JOIN genres g ON p.genreid = g.genreid
     </select>
 
-    <select id="findById" resultType="com.ssafy.tigetting.dto.tget.PerformanceDto">
+    <select id="findById" resultType="com.ssafy.tigetting.performance.dto.PerformanceDto">
         SELECT 
             p.mt20id,
             p.prfnm,
@@ -58,7 +58,7 @@
         WHERE p.mt20id = #{id}
     </select>
 
-    <resultMap id="PerformanceDetailResultMap" type="com.ssafy.tigetting.dto.tget.PerformanceDetailDto">
+    <resultMap id="PerformanceDetailResultMap" type="com.ssafy.tigetting.performance.dto.PerformanceDetailDto">
         <result property="mt20id" column="mt20id"/>
         <result property="prfnm" column="prfnm"/>
         <result property="prfpdfrom" column="prfpdfrom"/>

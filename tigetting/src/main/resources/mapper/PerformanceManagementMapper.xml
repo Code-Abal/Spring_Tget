@@ -5,7 +5,7 @@
 <mapper namespace="com.ssafy.tigetting.mapper.PerformanceManagementMapper">
 
     <!-- 기업회원이 등록한 공연 목록 조회 -->
-    <select id="findByUserId" resultType="com.ssafy.tigetting.dto.tget.PerformanceDto">
+    <select id="findByUserId" resultType="com.ssafy.tigetting.performance.dto.PerformanceDto">
         SELECT 
             p.mt20id,
             p.prfnm,
@@ -67,7 +67,7 @@
     </delete>
 
     <!-- 포스터 정보 조회 -->
-    <select id="findPosterById" resultType="com.ssafy.tigetting.dto.tget.PerformanceDto">
+    <select id="findPosterById" resultType="com.ssafy.tigetting.performance.dto.PerformanceDto">
         SELECT mt20id, poster 
         FROM performances 
         WHERE mt20id = #{mt20id}
