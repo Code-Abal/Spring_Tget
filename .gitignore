@@ -1,0 +1,16 @@
+# Docker DB runtime (절대 Git 금지)
+db_data/
+tigetting/db_data/
+
+# IDE
+.idea/
+.vscode/
+
+# Build
+target/
+build/
+node_modules/
+
+# Env
+.env
+.DS_Store
