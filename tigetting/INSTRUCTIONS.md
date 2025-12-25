@@ -15,23 +15,26 @@
 
 1. **DB 실행하기** (프로젝트 루트 폴더에서)
 
-    ```bash
+    ```cmd
     docker-compose up -d
     ```
 
 2. **초기 데이터 넣기** (최초 1회만 필요)
     DB가 실행된 후, 약 10초 정도 기다렸다가 아래 명령어를 실행하세요.
 
-    **Windows (PowerShell 또는 CMD):**
+    **Windows (PowerShell):**
+    ```powershell
+    .\execute_migration_docker.bat
+    ```
+
+    **Windows (CMD):**
     ```cmd
-    cd tigetting
     execute_migration_docker.bat
     ```
 
     **Linux/Mac (Terminal 또는 Git Bash):**
     ```bash
-    cd tigetting
-    bash execute_migration_docker.sh
+    bash execute_migration.sh
     ```
 
     ⏱️ **소요 시간:** 약 1~2분 (데이터 삽입 중...)
@@ -106,6 +109,13 @@ npm run dev
 ---
 
 ## 6. 자주 묻는 질문 (FAQ)
+
+**Q. PowerShell에서 "용어가 cmdlet, 함수... 인식되지 않습니다" 오류가 나요!**  
+A. PowerShell에서 배치 파일을 실행할 때는 반드시 `.\` 접두사를 사용해야 합니다:
+```powershell
+.\execute_migration_docker.bat
+```
+CMD에서는 접두사 없이 `execute_migration_docker.bat`만 입력하면 됩니다.
 
 **Q. DB 연결 에러가 계속 나요!**  
 A. `docker ps` 명령어로 `tget-db` 컨테이너가 켜져 있는지 확인하세요. 만약 꺼져있다면 `docker-compose up -d`를 다시 실행해주세요.

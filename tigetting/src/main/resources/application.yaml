@@ -10,7 +10,7 @@ spring:
     resources:
       add-mappings: true
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/tget?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    url: jdbc:mysql://127.0.0.1:3307/tget?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
     username: ssafy
     password: ssafy
     driver-class-name: com.mysql.cj.jdbc.Driver
