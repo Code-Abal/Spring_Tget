@@ -20,6 +20,7 @@ public enum ErrorCode {
     // USER
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER_005", "존재하지 않는 사용자입니다"),
     PASSWORD_MISMATCH(HttpStatus.BAD_REQUEST, "USER_006", "비밀번호가 일치하지 않습니다"),
+    INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "USER_007", "현재 비밀번호가 올바르지 않습니다"),
 
     // COMMON
     INVALID_REQUEST(HttpStatus.BAD_REQUEST, "COMMON_001", "잘못된 요청입니다"),

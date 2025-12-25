@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.tigetting.email.mapper.EmailVerificationMapper">
+
+    <!-- 인증 정보 저장 (중복 시 업데이트) -->
+    <insert id="save">
+        INSERT INTO email_verifications (email, verification_code, expiry_time, verified, created_at)
+        VALUES (#{email}, #{verificationCode}, #{expiryTime}, false, NOW())
+        ON DUPLICATE KEY UPDATE
+            verification_code = #{verificationCode},
+            expiry_time = #{expiryTime},
+            verified = false,
+            created_at = NOW()
+    </insert>
+
+    <!-- 이메일로 인증 정보 조회 -->
+    <select id="findByEmail" resultType="com.ssafy.tigetting.email.entity.EmailVerification">
+        SELECT 
+            email,
+            verification_code as verificationCode,
+            expiry_time as expiryTime,
+            verified,
+            created_at as createdAt
+        FROM email_verifications
+        WHERE email = #{email}
+    </select>
+
+    <!-- 인증 완료 처리 -->
+    <update id="updateVerified">
+        UPDATE email_verifications
+        SET verified = true
+        WHERE email = #{email}
+    </update>
+
+    <!-- 이메일로 인증 정보 삭제 -->
+    <delete id="deleteByEmail">
+        DELETE FROM email_verifications
+        WHERE email = #{email}
+    </delete>
+
+    <!-- 만료된 인증 정보 삭제 -->
+    <delete id="deleteExpired">
+        DELETE FROM email_verifications
+        WHERE expiry_time &lt; #{now}
+    </delete>
+
+</mapper>

@@ -50,4 +50,22 @@
         <association property="schedule" column="schedule_id" select="com.ssafy.tigetting.mapper.PerformanceScheduleMapper.findById"/>
     </resultMap>
 
+    <!-- ========== AI 추천 시스템 추가 쿼리 ========== -->
+    
+    <!-- 사용자 예매 이력 조회 (최근 10건) -->
+    <!-- 현재 bookings 테이블이 없으므로 빈 결과 반환 -->
+    <select id="selectUserBookingHistory" 
+            parameterType="int"
+            resultType="com.ssafy.tigetting.recommendation.dto.UserBookingHistory">
+        SELECT 
+            NULL as prfnm,
+            NULL as fcltynm,
+            NULL as area,
+            NULL as bookingDate,
+            NULL as viewDate,
+            NULL as genreid
+        FROM DUAL
+        WHERE 1=0
+    </select>
+
 </mapper>

@@ -55,6 +55,18 @@
         WHERE userid = #{userId}
     </update>
 
+    <!-- ✅ 회원정보 수정 (이름, 전화번호, 비밀번호) -->
+    <update id="updateUser">
+        UPDATE users
+        SET
+            name = #{name},
+            phone = #{phone}
+            <if test="password != null and password != ''">
+                , password = #{password}
+            </if>
+        WHERE email = #{email}
+    </update>
+
     <!-- ✅ 조회: ID -->
     <select id="findById" resultMap="UserResultMap">
         SELECT
@@ -85,6 +97,22 @@
         FROM users u
         JOIN roles r ON u.roleid = r.roleid
         WHERE u.email = #{email}
+    </select>
+
+    <!-- ✅ 조회: USERNAME (Email과 동일하게 처리) -->
+    <select id="findByUsername" resultMap="UserResultMap">
+        SELECT
+            u.userid,
+            u.email,
+            u.password,
+            u.name,
+            u.phone,
+            u.register,
+            r.roleid,
+            r.name AS role_name
+        FROM users u
+        JOIN roles r ON u.roleid = r.roleid
+        WHERE u.email = #{username}
     </select>
 
     <!-- ✅ 존재 여부 -->

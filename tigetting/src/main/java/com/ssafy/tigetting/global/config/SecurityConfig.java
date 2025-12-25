@@ -71,6 +71,20 @@ public class SecurityConfig {
     }
 
     @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:8080"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable());
         http.cors(Customizer.withDefaults());
@@ -82,11 +96,17 @@ public class SecurityConfig {
                 .requestMatchers("/admin/auth/**").hasRole("ADMIN")
                 .requestMatchers("/auth/**").permitAll()
 
+                // Swagger UI 및 API 문서 접근 허용
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
+
                 // 헬스체크 허용
                 .requestMatchers("/actuator/**").permitAll()
 
                 // 공연 정보 조회 허용
                 .requestMatchers("/performances/**").permitAll()
+
+                // AI 추천 API 허용
+                .requestMatchers("/api/recommendations/**").permitAll()
 
                 // 공연장 관련 GET 요청은 로그인 불필요 (지도/조회용)
                 .requestMatchers(HttpMethod.GET, "/api/venues/**").permitAll()

@@ -11,6 +11,8 @@ public interface UserMapper {
     void save(UserEntity user);
 
     void modify(UserEntity user);
+    
+    void updateUser(UserEntity user);
 
     Optional<UserEntity> findById(Long id);
 

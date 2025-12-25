@@ -134,10 +134,14 @@
             p.mt10id
         FROM performances p
         LEFT JOIN genres g ON p.genreid = g.genreid
-        WHERE p.mt10id = #{mt10id}
-        <if test="genreId != null">
-            AND p.genreid = #{genreId}
-        </if>
+        <where>
+            <if test="mt10id != null">
+                p.mt10id = #{mt10id}
+            </if>
+            <if test="genreId != null">
+                AND p.genreid = #{genreId}
+            </if>
+        </where>
         ORDER BY p.prfpdfrom DESC
         LIMIT 100
     </select>
@@ -157,5 +161,52 @@
         <result property="updatedAt" column="updated_at"/>
         <association property="venue" column="venue_id" select="com.ssafy.tigetting.venue.mapper.VenueMapper.findById"/>
     </resultMap>
+
+    <!-- ========== AI 추천 시스템 추가 쿼리 ========== -->
+    
+    <!-- 전체 활성 공연 조회 (AI 배치용) -->
+    <select id="selectAllActivePerformances" resultType="com.ssafy.tigetting.recommendation.dto.PerformanceForAI">
+        SELECT 
+            p.mt20id,
+            p.prfnm,
+            p.genreid,
+            p.prfstate,
+            p.prfpdfrom,
+            p.prfpdto,
+            p.area,
+            p.fcltynm,
+            pd.prfcast
+        FROM performances p
+        LEFT JOIN performance_details pd ON p.mt20id = pd.mt20id
+        WHERE p.prfstate IN ('공연중', '공연예정')
+          AND p.prfpdto >= CURDATE()
+        ORDER BY p.prfpdfrom DESC
+    </select>
+    
+    <!-- ID 목록으로 공연 상세 조회 (순서 유지) -->
+    <select id="selectByIds" resultType="com.ssafy.tigetting.performance.dto.PerformanceDto">
+        SELECT 
+            p.mt20id,
+            p.prfnm,
+            p.prfpdfrom,
+            p.prfpdto,
+            p.fcltynm,
+            p.poster,
+            p.area,
+            g.genrenm as genreName,
+            p.prfstate,
+            p.mt10id
+        FROM performances p
+        LEFT JOIN genres g ON p.genreid = g.genreid
+        WHERE p.mt20id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        ORDER BY FIELD(p.mt20id, 
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </select>
 
 </mapper>

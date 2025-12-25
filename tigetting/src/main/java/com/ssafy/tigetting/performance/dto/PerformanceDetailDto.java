@@ -1,5 +1,6 @@
 package com.ssafy.tigetting.performance.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,8 +22,13 @@ public class PerformanceDetailDto {
     // 공연 기본 정보
     private String mt20id;
     private String prfnm;
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate prfpdfrom;
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate prfpdto;
+    
     private String fcltynm;
     private String poster;
     private String area;
@@ -37,7 +43,10 @@ public class PerformanceDetailDto {
     private String prfage; // 관람 연령
     private String pcseguidance; // 가격 정보
     private String sty; // 줄거리
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate updatedate; // 최종 수정일
+    
     private String dtguidance; // 공연 시간 안내
 
     // 스틸 이미지 목록

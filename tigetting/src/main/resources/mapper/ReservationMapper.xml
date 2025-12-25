@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.tigetting.reservation.mapper.ReservationMapper">
+
+    <insert id="insertReservation" useGeneratedKeys="true" keyProperty="reservationId">
+        INSERT INTO reservations (
+            reservation_group_id,
+            userid,
+            mt20id,
+            seat_section,
+            seat_row,
+            seat_number,
+            price,
+            status,
+            reserved_at
+        ) VALUES (
+            #{reservationGroupId},
+            #{userId},
+            #{mt20id},
+            #{seatSection},
+            #{seatRow},
+            #{seatNumber},
+            #{price},
+            #{status},
+            #{reservedAt}
+        )
+    </insert>
+
+    <!-- Additional methods from interface -->
+    <select id="findByReservationGroupId" resultType="com.ssafy.tigetting.reservation.entity.ReservationEntity">
+        SELECT 
+            reservation_id as reservationId,
+            reservation_group_id as reservationGroupId,
+            userid as userId,
+            mt20id,
+            seat_section as seatSection,
+            seat_row as seatRow,
+            seat_number as seatNumber,
+            price,
+            status,
+            reserved_at as reservedAt
+        FROM reservations 
+        WHERE reservation_group_id = #{groupId}
+    </select>
+
+    <select id="findByUserId" resultType="com.ssafy.tigetting.reservation.entity.ReservationEntity">
+        SELECT 
+            reservation_id as reservationId,
+            reservation_group_id as reservationGroupId,
+            userid as userId,
+            mt20id,
+            seat_section as seatSection,
+            seat_row as seatRow,
+            seat_number as seatNumber,
+            price,
+            status,
+            reserved_at as reservedAt
+        FROM reservations 
+        WHERE userid = #{userId}
+    </select>
+    
+    <update id="updateStatusByGroupId">
+        UPDATE reservations
+        SET status = #{status}
+        WHERE reservation_group_id = #{groupId}
+    </update>
+
+</mapper>

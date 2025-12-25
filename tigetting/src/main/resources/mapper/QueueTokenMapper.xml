@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.tigetting.queue.repository.QueueTokenMapper">
+
+    <resultMap id="QueueTokenResultMap" type="com.ssafy.tigetting.queue.entity.QueueToken">
+        <id property="tokenId" column="token_id"/>
+        <result property="token" column="token"/>
+        <result property="userId" column="user_id"/>
+        <result property="performanceId" column="performance_id"/>
+        <result property="status" column="status"/>
+        <result property="positionInQueue" column="position_in_queue"/>
+        <result property="estimatedWaitTimeMinutes" column="estimated_wait_time"/>
+        <result property="issuedAt" column="issued_at"/>
+        <result property="expiresAt" column="expires_at"/>
+        <result property="activatedAt" column="activated_at"/>
+        <result property="usedAt" column="used_at"/>
+        <result property="bookingExpiresAt" column="booking_expires_at"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="tokenId">
+        INSERT INTO queue_tokens (
+            token, user_id, performance_id, status, position_in_queue, 
+            estimated_wait_time, issued_at, expires_at, activated_at, 
+            used_at, booking_expires_at, created_at, updated_at
+        ) VALUES (
+            #{token}, #{userId}, #{performanceId}, #{status}, #{positionInQueue},
+            #{estimatedWaitTimeMinutes}, #{issuedAt}, #{expiresAt}, #{activatedAt},
+            #{usedAt}, #{bookingExpiresAt}, NOW(), NOW()
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE queue_tokens
+        SET 
+            status = #{status},
+            position_in_queue = #{positionInQueue},
+            estimated_wait_time = #{estimatedWaitTimeMinutes},
+            activated_at = #{activatedAt},
+            used_at = #{usedAt},
+            booking_expires_at = #{bookingExpiresAt},
+            updated_at = NOW()
+        WHERE token_id = #{tokenId}
+    </update>
+
+    <select id="findByToken" resultMap="QueueTokenResultMap">
+        SELECT * FROM queue_tokens WHERE token = #{token}
+    </select>
+
+    <select id="findActiveTokenByUserAndPerformance" resultMap="QueueTokenResultMap">
+        SELECT * FROM queue_tokens 
+        WHERE user_id = #{userId} 
+        AND performance_id = #{performanceId}
+        AND status IN ('WAITING', 'ACTIVE') 
+        ORDER BY created_at DESC 
+        LIMIT 1
+    </select>
+
+    <select id="findWaitingTokensByPerformance" resultMap="QueueTokenResultMap">
+        SELECT * FROM queue_tokens 
+        WHERE performance_id = #{performanceId} 
+        AND status = 'WAITING'
+        ORDER BY issued_at ASC
+    </select>
+
+    <select id="findPositionInQueue" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM queue_tokens 
+        WHERE performance_id = #{performanceId} 
+        AND status = 'WAITING' 
+        AND issued_at &lt; #{issuedAt}
+    </select>
+
+    <select id="countActiveTokensByPerformanceId" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM queue_tokens 
+        WHERE performance_id = #{performanceId} 
+        AND status = 'ACTIVE'
+    </select>
+    
+    <select id="countWaitingTokensByPerformance" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM queue_tokens 
+        WHERE performance_id = #{performanceId} 
+        AND status = 'WAITING'
+    </select>
+
+    <select id="findExpiredTokens" resultMap="QueueTokenResultMap">
+        SELECT * FROM queue_tokens 
+        WHERE (expires_at &lt; #{now} OR booking_expires_at &lt; #{now})
+        AND status IN ('WAITING', 'ACTIVE')
+    </select>
+
+    <select id="findWaitingTokensByPerformanceOrderByIssuedAt" resultMap="QueueTokenResultMap">
+        SELECT * FROM queue_tokens 
+        WHERE performance_id = #{performanceId} 
+        AND status = 'WAITING'
+        ORDER BY issued_at ASC
+    </select>
+    
+    <update id="updateAll" parameterType="java.util.List">
+        <foreach collection="tokens" item="item" separator=";">
+            UPDATE queue_tokens
+            SET 
+                status = #{item.status},
+                position_in_queue = #{item.positionInQueue},
+                estimated_wait_time = #{item.estimatedWaitTimeMinutes},
+                booking_expires_at = #{item.bookingExpiresAt},
+                activated_at = #{item.activatedAt},
+                updated_at = NOW()
+            WHERE token_id = #{item.tokenId}
+        </foreach>
+    </update>
+
+</mapper>

@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
                 description = "티게팅 프로젝트 API 명세서"
         ),
         servers = {
-                @Server(url = "http://localhost:8080", description = "Local Server")
+                @Server(url = "http://localhost:8081", description = "Local Server")
         }
 )
 public class SwaggerConfig {

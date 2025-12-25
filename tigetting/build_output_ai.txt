@@ -1,0 +1,54 @@
+﻿
+> Task :compileJava
+.\gradlew : C:\Users\dohyung\Desktop\pr
+oject\SSAFY\ssafyProject\tigetting\src\
+main\java\com\ssafy\tigetting\mapper\Bo
+okingMapper.java:27: error: cannot find
+ symbol
+위치 줄:1 문자:1
++ .\gradlew build -x test 2>&1 | Out-Fi
+le -FilePath build_output_ai.txt ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpeci 
+   fied: (C:\Users\dohyun...not find   
+  symbol:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCo 
+   mmandError
+ 
+            @Param("userid") Integer us
+erid);
+             ^
+  symbol:   class Param
+  location: interface BookingMapper
+1 error
+
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/dohyung/Desktop/project/SSAFY/ssafyProject/tigetting/build/reports/problems/problems-report.html
+FAILURE: Build failed with an exception
+.
+
+* What went wrong:
+Execution failed for task ':compileJava
+'.
+> Compilation failed; see the compiler 
+output below.
+  C:\Users\dohyung\Desktop\project\SSAF
+Y\ssafyProject\tigetting\src\main\java\
+com\ssafy\tigetting\mapper\BookingMappe
+r.java:27: error: cannot find symbol
+              @Param("userid") Integer 
+userid);
+               ^
+    symbol:   class Param
+    location: interface BookingMapper
+  1 error
+
+* Try:
+> Check your code and dependencies to f
+ix the compilation error(s)
+> Run with --scan to get full insights.
+
+BUILD FAILED in 4s
+1 actionable task: 1 executed

@@ -1,22 +1,42 @@
 server:
-  port: 81
+  port: 8081
 
 spring:
   application:
     name: tigetting
+  mvc:
+    throw-exception-if-no-handler-found: false
+  web:
+    resources:
+      add-mappings: true
   datasource:
-    url: jdbc:mysql://localhost:3306/tget?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
-    username: tiget
-    password: tiget
+    url: jdbc:mysql://127.0.0.1:3306/tget?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: ssafy
+    password: ssafy
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dksehgud3@gmail.com
+    password: ggwdeivhuayqtnke
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+      auth-code-expiration-millis: 180000
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.ssafy.tigetting.user.entity,com.ssafy.tigetting.entity,com.ssafy.tigetting.venue.entity
+  type-aliases-package: com.ssafy.tigetting.user.entity,com.ssafy.tigetting.entity,com.ssafy.tigetting.venue.entity,com.ssafy.tigetting.queue.entity,com.ssafy.tigetting.recommendation.dto
   configuration:
     map-underscore-to-camel-case: true
     default-enum-type-handler: org.apache.ibatis.type.EnumTypeHandler
-
 
 logging:
   level:
@@ -31,5 +51,22 @@ jwt:
   secret: ${JWT_SECRET:THIS_IS_A_LONG_RANDOM_PLAIN_SECRET_WITH_32+_CHARS_1234567890abcdef}
   access-token-validity-ms: 3600000
 
-# server:
-#   port: 44
+queue:
+  max-active-tokens: 1
+  max-inactive-seconds: 120
+  wait-time-per-person: 10
+
+# ========== AI 추천 시스템 설정 추가 ==========
+claude:
+  api:
+    url: https://gms.ssafy.io/gmsapi/api.anthropic.com/v1/messages
+    key: ${GMS_KEY:S14P02BF10-31d12203-895b-4cda-a03e-1a0a329bfa9b}
+    model: claude-opus-4-5-20251101
+    max-tokens: 4096
+
+recommendation:
+  batch:
+    cron: "0 0 3 * * *"  # 매일 새벽 3시
+  counts:
+    home: 10
+    genre: 5

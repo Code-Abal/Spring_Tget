@@ -1,5 +1,6 @@
 package com.ssafy.tigetting.performance.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssafy.tigetting.user.dto.UserDto;
 import com.ssafy.tigetting.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
@@ -21,8 +22,13 @@ public class PerformanceDto {
 
     private String mt20id;
     private String prfnm;
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate prfpdfrom;
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate prfpdto;
+    
     private String fcltynm;
     private String poster;
     private String area;

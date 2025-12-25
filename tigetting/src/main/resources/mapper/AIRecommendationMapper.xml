@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.tigetting.mapper.AIRecommendationMapper">
+
+    <!-- 추천 결과 저장 -->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO ai_recommendations (genre_id, mt20id, rank_order, generated_at)
+        VALUES (#{genreId}, #{mt20id}, #{rankOrder}, #{generatedAt})
+    </insert>
+
+    <!-- 배치 추천 저장 -->
+    <insert id="saveAll" parameterType="java.util.List">
+        INSERT INTO ai_recommendations (genre_id, mt20id, rank_order, generated_at)
+        VALUES
+        <foreach collection="recommendations" item="item" separator=",">
+            (#{item.genreId}, #{item.mt20id}, #{item.rankOrder}, #{item.generatedAt})
+        </foreach>
+    </insert>
+
+    <!-- 장르별 추천 조회 -->
+    <select id="findByGenreId" resultType="com.ssafy.tigetting.recommendation.dto.AIRecommendation">
+        SELECT 
+            id,
+            genre_id as genreId,
+            mt20id,
+            rank_order as rankOrder,
+            generated_at as generatedAt
+        FROM ai_recommendations
+        WHERE genre_id <if test="genreId == null">IS NULL</if><if test="genreId != null">= #{genreId}</if>
+        ORDER BY rank_order ASC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 장르별 추천 ID 목록 조회 -->
+    <select id="findIdsByGenreId" resultType="string">
+      SELECT mt20id
+      FROM ai_recommendations
+      <where>
+        <if test="genreId == null">
+          genre_id IS NULL
+        </if>
+        <if test="genreId != null">
+          genre_id = #{genreId}
+        </if>
+      </where>
+      ORDER BY rank_order ASC
+      LIMIT #{limit}
+    </select>
+
+    <!-- 기존 추천 삭제 (재생성 전) -->
+    <delete id="deleteByGenreId">
+        DELETE FROM ai_recommendations
+        WHERE genre_id <if test="genreId == null">IS NULL</if><if test="genreId != null">= #{genreId}</if>
+    </delete>
+
+    <!-- 전체 추천 삭제 -->
+    <delete id="deleteAll">
+        DELETE FROM ai_recommendations
+    </delete>
+
+</mapper>
